@@ -1,0 +1,369 @@
+        /* ==========================================================================
+           MINIMAL PORTFOLIO SYSTEM - ENHANCED CSS
+           ========================================================================== */
+        /* Base Font Sizes */
+        html {
+            font-size: 14px;
+            scrollbar-gutter: stable;
+            scroll-behavior: smooth;
+        }
+
+        @media (min-width: 768px) {
+            html {
+                font-size: 16px;
+            }
+        }
+
+        /* ==========================================================================
+           MINIMAL COLOR SYSTEM
+           ========================================================================== */
+        :root {
+            /* Base Colors - Minimal Palette */
+            --color-white: #ffffff;
+            --color-black: #000000;
+            --color-gray-50: #f8f9fa;
+            --color-gray-100: #f1f3f4;
+            --color-gray-200: #e9ecef;
+            --color-gray-300: #dee2e6;
+            --color-gray-400: #ced4da;
+            --color-gray-500: #adb5bd;
+            --color-gray-600: #6c757d;
+            --color-gray-700: #495057;
+            --color-gray-800: #343a40;
+            --color-gray-900: #212529;
+            /* Accent Colors - Minimal Usage */
+            --color-blue: #0066cc;
+            --color-green: #00b369;
+            --color-yellow: #ff9500;
+            --color-red: #ff3b30;
+            /* Semantic Color Assignments */
+            --color-primary: var(--color-gray-900);
+            --color-secondary: var(--color-gray-600);
+            --color-background: var(--color-white);
+            --color-surface: var(--color-gray-50);
+            --color-border: var(--color-gray-200);
+            --color-text: var(--color-gray-900);
+            --color-text-muted: var(--color-gray-600);
+            --color-text-light: var(--color-gray-500);
+            /* Status Colors */
+            --color-success: var(--color-green);
+            --color-warning: var(--color-yellow);
+            --color-danger: var(--color-red);
+            --color-info: var(--color-blue);
+            /* Shadows - Subtle and Clean */
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.12);
+            /* Borders and Radius */
+            --border-radius-sm: 4px;
+            --border-radius-md: 8px;
+            --border-radius-lg: 12px;
+            --border-width: 1px;
+            /* Spacing System */
+            --space-xs: 0.25rem;
+            --space-sm: 0.5rem;
+            --space-md: 1rem;
+            --space-lg: 1.5rem;
+            --space-xl: 2rem;
+            --space-2xl: 3rem;
+        }
+
+        /* ==========================================================================
+           GLOBAL STYLES
+           ========================================================================== */
+        html {
+            position: relative;
+            min-height: 100%;
+        }
+
+        body {
+            margin: 0;
+            color: var(--color-text);
+            background-color: var(--color-background);
+            line-height: 1.6;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        /* Focus States - Clean and Accessible */
+        .btn:focus,
+        .btn:active:focus,
+        .btn-link.nav-link:focus,
+        .form-control:focus,
+        .form-check-input:focus {
+            box-shadow: 0 0 0 2px var(--color-white), 0 0 0 4px var(--color-gray-800);
+            outline: none;
+        }
+
+        /* ==========================================================================
+           CARD COMPONENTS
+           ========================================================================== */
+        .summary-card {
+            border: var(--border-width) solid var(--color-border);
+            border-radius: var(--border-radius-md);
+            background: var(--color-white);
+            box-shadow: var(--shadow-sm);
+            transition: all 0.2s ease;
+            padding: var(--space-lg);
+        }
+
+        .summary-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-1px);
+            border-color: var(--color-gray-300);
+        }
+
+        .project-card {
+            border: var(--border-width) solid var(--color-border);
+            border-radius: var(--border-radius-md);
+            background: var(--color-white);
+            box-shadow: var(--shadow-sm);
+            transition: all 0.2s ease;
+            overflow: hidden;
+        }
+
+        .project-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+            border-color: var(--color-gray-300);
+        }
+
+        .skill-card {
+            border: var(--border-width) solid var(--color-border);
+            border-radius: var(--border-radius-md);
+            background: var(--color-white);
+            box-shadow: var(--shadow-sm);
+            transition: all 0.2s ease;
+            padding: var(--space-lg);
+            text-align: center;
+        }
+
+        .skill-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-1px);
+            border-color: var(--color-gray-300);
+        }
+
+        /* ==========================================================================
+           TYPOGRAPHY & METRICS
+           ========================================================================== */
+        .metric-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--color-text);
+            margin: var(--space-sm) 0;
+            line-height: 1.2;
+        }
+
+        .metric-label {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--color-text);
+            margin-bottom: var(--space-xs);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .metric-description {
+            font-size: 0.813rem;
+            color: var(--color-text-muted);
+            margin: 0;
+            min-height: 1.2rem;
+            display: flex;
+            align-items: center;
+        }
+
+        /* ==========================================================================
+           BUTTONS - MINIMAL DESIGN
+           ========================================================================== */
+        .btn-outline-secondary {
+            border-color: var(--color-border);
+            color: var(--color-black);
+            background: var(--color-white);
+            transition: all 0.2s ease;
+            border-width: var(--border-width);
+        }
+
+        .btn-outline-secondary:hover {
+            background-color: var(--color-gray-50);
+            border-color: var(--color-border);
+            color: var(--color-black);
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md) !important;
+        }
+
+        /* ==========================================================================
+           NAVIGATION
+           ========================================================================== */
+        .navbar {
+            background: var(--color-white) !important;
+            border-bottom: var(--border-width) solid var(--color-border);
+            padding: var(--space-md) 0;
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            color: var(--color-text) !important;
+            font-size: 1.25rem;
+        }
+
+        .nav-link {
+            color: var(--color-text-muted) !important;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            margin: 0 var(--space-sm) !important;
+        }
+
+        .nav-link:hover {
+            color: var(--color-text) !important;
+            transform: translateY(-1px);
+        }
+
+        /* ==========================================================================
+           HERO SECTION
+           ========================================================================== */
+        .hero-section {
+            background: linear-gradient(135deg, var(--color-white) 0%, var(--color-gray-50) 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-avatar {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 4px solid var(--color-white);
+            box-shadow: var(--shadow-lg);
+            object-fit: cover;
+        }
+
+        /* ==========================================================================
+           TECH STACK ICONS
+           ========================================================================== */
+        .tech-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--color-surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: var(--color-text);
+            transition: all 0.2s ease;
+            border: var(--border-width) solid var(--color-border);
+        }
+
+        .tech-icon:hover {
+            background: var(--color-white);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+
+        /* ==========================================================================
+           PROJECT GRID
+           ========================================================================== */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: var(--space-xl);
+        }
+
+        @media (max-width: 768px) {
+            .projects-grid {
+                grid-template-columns: 1fr;
+                gap: var(--space-lg);
+            }
+        }
+
+        .project-image {
+            height: 200px;
+            object-fit: cover;
+            background: var(--color-surface);
+        }
+
+        .project-placeholder {
+            height: 200px;
+            background: linear-gradient(135deg, var(--color-gray-50) 0%, var(--color-gray-100) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-text-light);
+        }
+
+        /* ==========================================================================
+           BADGES & STATUS INDICATORS
+           ========================================================================== */
+        .badge {
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: var(--border-radius-sm);
+        }
+
+        .tech-badge {
+            background-color: var(--color-surface);
+            color: var(--color-text);
+            border: var(--border-width) solid var(--color-border);
+            font-size: 0.75rem;
+            font-weight: 500;
+            margin: var(--space-xs);
+        }
+
+        /* ==========================================================================
+           ANIMATIONS
+           ========================================================================== */
+        .fade-in {
+            opacity: 0;
+            animation: fadeIn 0.6s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        .slide-up {
+            transform: translateY(20px);
+            opacity: 0;
+            animation: slideUp 0.6s ease forwards;
+        }
+
+        @keyframes slideUp {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* ==========================================================================
+           CONTACT FORM
+           ========================================================================== */
+        .form-control:focus {
+            border-color: var(--color-gray-400);
+            box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+        }
+
+        /* ==========================================================================
+           RESPONSIVE DESIGN
+           ========================================================================== */
+        @media (max-width: 576px) {
+            .hero-avatar {
+                width: 150px;
+                height: 150px;
+            }
+
+            .metric-value {
+                font-size: 1.5rem;
+            }
+
+            .tech-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+            }
+        }
