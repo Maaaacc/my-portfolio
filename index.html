@@ -42,35 +42,46 @@
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="hero-section">
+    <section id="home" class="hero-section py-5">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-lg-6 mb-4 mb-lg-0">
+
+                <!-- Profile Image -->
+                <div class="col-12 col-md-6 order-1 order-md-2 text-center mb-4 mb-md-0">
+                    <div class="slide-up">
+                        <img src="images/Profile.jpg" alt="Portrait of Sac Macross R. Abaño"
+                            class="hero-avatar img-fluid rounded-circle shadow-lg" style="max-width: 280px;">
+                    </div>
+                </div>
+
+                <!-- Hero Text -->
+                <div class="col-12 col-md-6 order-2 order-md-1 text-center text-md-start">
                     <div class="fade-in">
-                        <h1 class="display-4 fw-bold mb-3">Hi, I'm Macross Abaño</h1>
-                        <h2 class="h4 text-muted mb-4">Software Developer</h2>
+                        <h1 class="display-4 fw-bold mb-2">Hi, I'm <span class="text-primary">Macross Abaño</span></h1>
+                        <h2 class="h5 text-muted mb-4">Software Developer</h2>
                         <p class="lead text-muted mb-4">
-                            I create modern web applications with clean code and exceptional user experiences.
-                            Passionate about solving complex problems through innovative technology solutions.
+                            I build modern, responsive web applications with clean code and
+                            exceptional user experiences. Passionate about turning complex
+                            problems into simple, innovative solutions.
                         </p>
-                        <div class="d-flex flex-column flex-sm-row gap-3">
-                            <a href="#projects" class="btn btn-dark btn-lg">
+
+                        <!-- Buttons -->
+                        <div
+                            class="d-flex flex-column flex-sm-row gap-3 justify-content-center justify-content-md-start">
+                            <a href="#projects" class="btn btn-dark btn-lg px-4">
                                 <i class="bi bi-code-slash me-2"></i>View Projects
                             </a>
-                            <a href="#contact" class="btn btn-outline-secondary btn-lg">
+                            <a href="#contact" class="btn btn-outline-secondary btn-lg px-4">
                                 <i class="bi bi-envelope me-2"></i>Get In Touch
                             </a>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6 text-center">
-                    <div class="slide-up">
-                        <img src="images/Profile.jpg" alt="Sac Macross R. Abaño" class="hero-avatar">
-                    </div>
-                </div>
+
             </div>
         </div>
     </section>
+
 
     <!-- About Section -->
     <section id="about" class="py-5" style="background-color: var(--color-surface);">
@@ -169,7 +180,7 @@
             </div>
 
             <div class="projects-grid">
-                <!-- Project Card -->
+                <!-- Project 1 -->
                 <div class="project-card" style="cursor: default;">
                     <div class="project-placeholder">
                         <img src="images/BahayNgAlumni/Desktop-Landing.png" alt="Bahay Ng Alumni"
@@ -179,14 +190,21 @@
                     <div class="p-4">
                         <h5 class="fw-bold mb-2">Bahay Ng Alumni - Booking System</h5>
                         <p class="text-muted mb-3">
-                            A full-stack e-commerce solution with React frontend, Node.js backend,
-                            and integrated payment processing.
+                            A full-featured web system combining hotel booking, content management,
+                            and alumni tracer modules. Includes PDF reporting with jsPDF, email
+                            verification, role-based dashboards, and efficient data management for
+                            both admins and users.
                         </p>
+
                         <div class="mb-3">
                             <span class="tech-badge">PHP</span>
                             <span class="tech-badge">JavaScript</span>
+                            <span class="tech-badge">Bootstrap</span>
                             <span class="tech-badge">MySQL</span>
+                            <span class="tech-badge">jsPDF</span>
+                            <span class="tech-badge">PHPMailer</span>
                         </div>
+
                         <div class="d-flex gap-2">
                             <a href="#" class="btn btn-dark btn-sm">
                                 <i class="bi bi-github me-1"></i>Code
@@ -199,8 +217,6 @@
                         </div>
                     </div>
                 </div>
-
-
                 <!-- Modal -->
                 <div class="modal fade" id="galleryModal1" tabindex="-1" aria-hidden="true">
                     <div class="modal-dialog modal-lg modal-dialog-centered">
@@ -311,28 +327,27 @@
                         </div>
                     </div>
                 </div>
-
-
-
-
-
                 <!-- Project 2 -->
                 <div class="project-card">
                     <div class="project-placeholder">
-                        <i class="bi bi-graph-up" style="font-size: 3rem;"></i>
+                        <i class="bi bi-phone" style="font-size: 3rem;"></i>
                     </div>
                     <div class="p-4">
-                        <h5 class="fw-bold mb-2">Analytics Dashboard</h5>
+                        <h5 class="fw-bold mb-2">Library Management System</h5>
                         <p class="text-muted mb-3">
-                            Real-time analytics dashboard for business intelligence. Built with Vue.js
-                            and D3.js for interactive data visualizations, connected to a Python Flask API.
+                            A web-based system designed to manage library operations such as book
+                            cataloging, borrowing, and user management. Includes features like
+                            search, borrowing limits, and an admin dashboard for efficient oversight.
                         </p>
                         <div class="mb-3">
-                            <span class="tech-badge">Vue.js</span>
-                            <span class="tech-badge">D3.js</span>
-                            <span class="tech-badge">Python</span>
-                            <span class="tech-badge">Flask</span>
+                            <span class="tech-badge">ASP.NET Core MVC</span>
+                            <span class="tech-badge">Entity Framework Core</span>
+                            <span class="tech-badge">C#</span>
+                            <span class="tech-badge">JavaScript</span>
+                            <span class="tech-badge">Bootstrap</span>
+                            <span class="tech-badge">MS SQL Server</span>
                         </div>
+
                         <div class="d-flex gap-2">
                             <a href="#" class="btn btn-dark btn-sm">
                                 <i class="bi bi-eye me-1"></i>Live Demo
@@ -347,38 +362,10 @@
                 <!-- Project 3 -->
                 <div class="project-card">
                     <div class="project-placeholder">
-                        <i class="bi bi-phone" style="font-size: 3rem;"></i>
-                    </div>
-                    <div class="p-4">
-                        <h5 class="fw-bold mb-2">Task Management App</h5>
-                        <p class="text-muted mb-3">
-                            Cross-platform mobile application for task and project management.
-                            Features real-time collaboration, file sharing, and progress tracking.
-                        </p>
-                        <div class="mb-3">
-                            <span class="tech-badge">React Native</span>
-                            <span class="tech-badge">Firebase</span>
-                            <span class="tech-badge">Redux</span>
-                            <span class="tech-badge">TypeScript</span>
-                        </div>
-                        <div class="d-flex gap-2">
-                            <a href="#" class="btn btn-dark btn-sm">
-                                <i class="bi bi-eye me-1"></i>Live Demo
-                            </a>
-                            <a href="#" class="btn btn-outline-secondary btn-sm">
-                                <i class="bi bi-github me-1"></i>Code
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project 4 -->
-                <div class="project-card">
-                    <div class="project-placeholder">
                         <i class="bi bi-shield-check" style="font-size: 3rem;"></i>
                     </div>
                     <div class="p-4">
-                        <h5 class="fw-bold mb-2">Security Audit Tool</h5>
+                        <h5 class="fw-bold mb-2"> Personal Note App</h5>
                         <p class="text-muted mb-3">
                             Automated security scanning tool for web applications. Identifies
                             vulnerabilities and provides detailed reports with remediation suggestions.
