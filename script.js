@@ -223,7 +223,7 @@ document.addEventListener("DOMContentLoaded", function () {
     initializeCarouselIndicators('#carouselDesktop', '#desktopIndicators');
     initializeCarouselIndicators('#carouselMobile', '#mobileIndicators');
     initializeGalleryToggle();
-    initializeScrollAnimations();
+    // initializeScrollAnimations();
 });
 
 // Initialize typing effect when page loads
