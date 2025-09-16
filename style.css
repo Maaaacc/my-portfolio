@@ -1,369 +1,669 @@
-        /* ==========================================================================
+/* ==========================================================================
            MINIMAL PORTFOLIO SYSTEM - ENHANCED CSS
            ========================================================================== */
-        /* Base Font Sizes */
-        html {
-            font-size: 14px;
-            scrollbar-gutter: stable;
-            scroll-behavior: smooth;
-        }
+/* Base Font Sizes */
+html {
+    font-size: 14px;
+    scrollbar-gutter: stable;
+    scroll-behavior: smooth;
+}
 
-        @media (min-width: 768px) {
-            html {
-                font-size: 16px;
-            }
-        }
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
 
-        /* ==========================================================================
+/* ==========================================================================
            MINIMAL COLOR SYSTEM
            ========================================================================== */
-        :root {
-            /* Base Colors - Minimal Palette */
-            --color-white: #ffffff;
-            --color-black: #000000;
-            --color-gray-50: #f8f9fa;
-            --color-gray-100: #f1f3f4;
-            --color-gray-200: #e9ecef;
-            --color-gray-300: #dee2e6;
-            --color-gray-400: #ced4da;
-            --color-gray-500: #adb5bd;
-            --color-gray-600: #6c757d;
-            --color-gray-700: #495057;
-            --color-gray-800: #343a40;
-            --color-gray-900: #212529;
-            /* Accent Colors - Minimal Usage */
-            --color-blue: #0066cc;
-            --color-green: #00b369;
-            --color-yellow: #ff9500;
-            --color-red: #ff3b30;
-            /* Semantic Color Assignments */
-            --color-primary: var(--color-gray-900);
-            --color-secondary: var(--color-gray-600);
-            --color-background: var(--color-white);
-            --color-surface: var(--color-gray-50);
-            --color-border: var(--color-gray-200);
-            --color-text: var(--color-gray-900);
-            --color-text-muted: var(--color-gray-600);
-            --color-text-light: var(--color-gray-500);
-            /* Status Colors */
-            --color-success: var(--color-green);
-            --color-warning: var(--color-yellow);
-            --color-danger: var(--color-red);
-            --color-info: var(--color-blue);
-            /* Shadows - Subtle and Clean */
-            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-            --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.08);
-            --shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.12);
-            /* Borders and Radius */
-            --border-radius-sm: 4px;
-            --border-radius-md: 8px;
-            --border-radius-lg: 12px;
-            --border-width: 1px;
-            /* Spacing System */
-            --space-xs: 0.25rem;
-            --space-sm: 0.5rem;
-            --space-md: 1rem;
-            --space-lg: 1.5rem;
-            --space-xl: 2rem;
-            --space-2xl: 3rem;
-        }
+:root {
+    /* Base Colors - Minimal Palette */
+    --color-white: #ffffff;
+    --color-black: #000000;
+    --color-gray-50: #f8f9fa;
+    --color-gray-100: #f1f3f4;
+    --color-gray-200: #e9ecef;
+    --color-gray-300: #dee2e6;
+    --color-gray-400: #ced4da;
+    --color-gray-500: #adb5bd;
+    --color-gray-600: #6c757d;
+    --color-gray-700: #495057;
+    --color-gray-800: #343a40;
+    --color-gray-900: #212529;
+    /* Accent Colors - Minimal Usage */
+    --color-blue: #0066cc;
+    --color-green: #00b369;
+    --color-yellow: #ff9500;
+    --color-red: #ff3b30;
+    /* Semantic Color Assignments */
+    --color-primary: var(--color-gray-900);
+    --color-secondary: var(--color-gray-600);
+    --color-background: var(--color-white);
+    --color-surface: var(--color-gray-50);
+    --color-border: var(--color-gray-200);
+    --color-text: var(--color-gray-900);
+    --color-text-muted: var(--color-gray-600);
+    --color-text-light: var(--color-gray-500);
+    /* Status Colors */
+    --color-success: var(--color-green);
+    --color-warning: var(--color-yellow);
+    --color-danger: var(--color-red);
+    --color-info: var(--color-blue);
+    /* Shadows - Subtle and Clean */
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
+    --shadow-lg: 0 8px 25px rgba(0, 0, 0, 0.2);
+    /* Borders and Radius */
+    --border-radius-sm: 6px;
+    --border-radius-md: 12px;
+    --border-radius-lg: 16px;
+    --border-width: 1px;
+    /* Spacing System */
+    --space-xs: 0.25rem;
+    --space-sm: 0.5rem;
+    --space-md: 1rem;
+    --space-lg: 1.5rem;
+    --space-xl: 2rem;
+    --space-2xl: 3rem;
+    /* Transitions */
+    --transition-fast: 0.15s ease;
+    --transition-base: 0.2s ease;
+    --transition-slow: 0.3s ease;
+}
 
-        /* ==========================================================================
+/* ==========================================================================
            GLOBAL STYLES
            ========================================================================== */
-        html {
-            position: relative;
-            min-height: 100%;
-        }
+html {
+    position: relative;
+    min-height: 100%;
+}
 
-        body {
-            margin: 0;
-            color: var(--color-text);
-            background-color: var(--color-background);
-            line-height: 1.6;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        }
+body {
+    margin: 0;
+    color: var(--color-text);
+    background-color: var(--color-background);
+    line-height: 1.6;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
 
-        /* Focus States - Clean and Accessible */
-        .btn:focus,
-        .btn:active:focus,
-        .btn-link.nav-link:focus,
-        .form-control:focus,
-        .form-check-input:focus {
-            box-shadow: 0 0 0 2px var(--color-white), 0 0 0 4px var(--color-gray-800);
-            outline: none;
-        }
+/* Focus States - Clean and Accessible */
+.btn:focus,
+.btn:active:focus,
+.btn-link.nav-link:focus,
+.form-control:focus,
+.form-check-input:focus {
+    box-shadow: 0 0 0 2px var(--color-white), 0 0 0 4px var(--color-gray-800);
+    outline: none;
+}
 
-        /* ==========================================================================
+/* ==========================================================================
            CARD COMPONENTS
            ========================================================================== */
-        .summary-card {
-            border: var(--border-width) solid var(--color-border);
-            border-radius: var(--border-radius-md);
-            background: var(--color-white);
-            box-shadow: var(--shadow-sm);
-            transition: all 0.2s ease;
-            padding: var(--space-lg);
-        }
+.summary-card {
+    border: var(--border-width) solid var(--color-border);
+    border-radius: var(--border-radius-md);
+    background: var(--color-white);
+    box-shadow: var(--shadow-sm);
+    transition: all var(--transition-base);
+    padding: var(--space-lg);
+}
 
-        .summary-card:hover {
-            box-shadow: var(--shadow-md);
-            transform: translateY(-1px);
-            border-color: var(--color-gray-300);
-        }
+.summary-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-1px);
+    border-color: var(--color-gray-300);
+}
 
-        .project-card {
-            border: var(--border-width) solid var(--color-border);
-            border-radius: var(--border-radius-md);
-            background: var(--color-white);
-            box-shadow: var(--shadow-sm);
-            transition: all 0.2s ease;
-            overflow: hidden;
-        }
+.project-card {
+    border: var(--border-width) solid var(--color-border);
+    border-radius: var(--border-radius-md);
+    background: var(--color-white);
+    box-shadow: var(--shadow-sm);
+    transition: all var(--transition-base);
+    overflow: hidden;
+}
 
-        .project-card:hover {
-            box-shadow: var(--shadow-md);
-            transform: translateY(-2px);
-            border-color: var(--color-gray-300);
-        }
+.project-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+    border-color: var(--color-gray-300);
+}
 
-        .skill-card {
-            border: var(--border-width) solid var(--color-border);
-            border-radius: var(--border-radius-md);
-            background: var(--color-white);
-            box-shadow: var(--shadow-sm);
-            transition: all 0.2s ease;
-            padding: var(--space-lg);
-            text-align: center;
-        }
+.skill-card {
+    border: var(--border-width) solid var(--color-border);
+    border-radius: var(--border-radius-md);
+    background: var(--color-white);
+    box-shadow: var(--shadow-sm);
+    transition: all var(--transition-base);
+    padding: var(--space-lg);
+    text-align: center;
+}
 
-        .skill-card:hover {
-            box-shadow: var(--shadow-md);
-            transform: translateY(-1px);
-            border-color: var(--color-gray-300);
-        }
+.skill-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-1px);
+    border-color: var(--color-gray-300);
+}
 
-        /* ==========================================================================
+/* ==========================================================================
            TYPOGRAPHY & METRICS
            ========================================================================== */
-        .metric-value {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--color-text);
-            margin: var(--space-sm) 0;
-            line-height: 1.2;
-        }
+.metric-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin: var(--space-sm) 0;
+    line-height: 1.2;
+}
 
-        .metric-label {
-            font-size: 0.875rem;
-            font-weight: 600;
-            color: var(--color-text);
-            margin-bottom: var(--space-xs);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
+.metric-label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--space-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
 
-        .metric-description {
-            font-size: 0.813rem;
-            color: var(--color-text-muted);
-            margin: 0;
-            min-height: 1.2rem;
-            display: flex;
-            align-items: center;
-        }
+.metric-description {
+    font-size: 0.813rem;
+    color: var(--color-text-muted);
+    margin: 0;
+    min-height: 1.2rem;
+    display: flex;
+    align-items: center;
+}
 
-        /* ==========================================================================
+/* ==========================================================================
            BUTTONS - MINIMAL DESIGN
            ========================================================================== */
-        .btn-outline-secondary {
-            border-color: var(--color-border);
-            color: var(--color-black);
-            background: var(--color-white);
-            transition: all 0.2s ease;
-            border-width: var(--border-width);
-        }
+.btn-outline-secondary {
+    border-color: var(--color-border);
+    color: var(--color-black);
+    background: var(--color-white);
+    transition: all var(--transition-base);
+    border-width: var(--border-width);
+}
 
-        .btn-outline-secondary:hover {
-            background-color: var(--color-gray-50);
-            border-color: var(--color-border);
-            color: var(--color-black);
-        }
+.btn-outline-secondary:hover {
+    background-color: var(--color-gray-50);
+    border-color: var(--color-border);
+    color: var(--color-black);
+}
 
-        .btn:hover {
-            transform: translateY(-1px);
-            box-shadow: var(--shadow-md) !important;
-        }
+.btn:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md) !important;
+}
 
-        /* ==========================================================================
+/* ==========================================================================
            NAVIGATION
            ========================================================================== */
-        .navbar {
-            background: var(--color-white) !important;
-            border-bottom: var(--border-width) solid var(--color-border);
-            padding: var(--space-md) 0;
-        }
+.navbar {
+    background: var(--color-white) !important;
+    border-bottom: var(--border-width) solid var(--color-border);
+    padding: var(--space-md) 0;
+}
 
-        .navbar-brand {
-            font-weight: 700;
-            color: var(--color-text) !important;
-            font-size: 1.25rem;
-        }
+.navbar-brand {
+    font-weight: 700;
+    color: var(--color-text) !important;
+    font-size: 1.25rem;
+}
 
-        .nav-link {
-            color: var(--color-text-muted) !important;
-            font-weight: 500;
-            transition: all 0.2s ease;
-            margin: 0 var(--space-sm) !important;
-        }
+.nav-link {
+    color: var(--color-text-muted) !important;
+    font-weight: 500;
+    transition: all var(--transition-base);
+    margin: 0 var(--space-sm) !important;
+}
 
-        .nav-link:hover {
-            color: var(--color-text) !important;
-            transform: translateY(-1px);
-        }
+.nav-link:hover {
+    color: var(--color-text) !important;
+    transform: translateY(-1px);
+}
 
-        /* ==========================================================================
+/* ==========================================================================
            HERO SECTION
            ========================================================================== */
-        .hero-section {
-            background: linear-gradient(135deg, var(--color-white) 0%, var(--color-gray-50) 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-        }
+.hero-section {
+    background: linear-gradient(135deg, var(--color-white) 0%, var(--color-gray-50) 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+}
 
-        .hero-avatar {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            border: 4px solid var(--color-white);
-            box-shadow: var(--shadow-lg);
-            object-fit: cover;
-        }
+.hero-avatar {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 4px solid var(--color-white);
+    box-shadow: var(--shadow-lg);
+    object-fit: cover;
+}
 
-        /* ==========================================================================
+/* ==========================================================================
            TECH STACK ICONS
            ========================================================================== */
-        .tech-icon {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: var(--color-surface);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            color: var(--color-text);
-            transition: all 0.2s ease;
-            border: var(--border-width) solid var(--color-border);
-        }
+.tech-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: var(--color-surface);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: var(--color-text);
+    transition: all var(--transition-base);
+    border: var(--border-width) solid var(--color-border);
+}
 
-        .tech-icon:hover {
-            background: var(--color-white);
-            box-shadow: var(--shadow-md);
-            transform: translateY(-2px);
-        }
+.tech-icon:hover {
+    background: var(--color-white);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+}
 
-        /* ==========================================================================
+/* ==========================================================================
            PROJECT GRID
            ========================================================================== */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: var(--space-xl);
-        }
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: var(--space-xl);
+}
 
-        @media (max-width: 768px) {
-            .projects-grid {
-                grid-template-columns: 1fr;
-                gap: var(--space-lg);
-            }
-        }
+@media (max-width: 768px) {
+    .projects-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-lg);
+    }
+}
 
-        .project-image {
-            height: 200px;
-            object-fit: cover;
-            background: var(--color-surface);
-        }
+.project-image {
+    height: 200px;
+    object-fit: cover;
+    background: var(--color-surface);
+}
 
-        .project-placeholder {
-            height: 200px;
-            background: linear-gradient(135deg, var(--color-gray-50) 0%, var(--color-gray-100) 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--color-text-light);
-        }
+.project-placeholder {
+    height: 220px;
+    background: linear-gradient(135deg, var(--color-gray-50) 0%, var(--color-gray-100) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-light);
+    position: relative;
+    overflow: hidden;
+}
 
-        /* ==========================================================================
+.project-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-slow);
+}
+
+.project-placeholder:hover img {
+    transform: scale(1.05);
+}
+
+/* ==========================================================================
            BADGES & STATUS INDICATORS
            ========================================================================== */
-        .badge {
-            font-size: 0.75rem;
-            font-weight: 600;
-            padding: var(--space-xs) var(--space-sm);
-            border-radius: var(--border-radius-sm);
-        }
+.badge {
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: var(--space-xs) var(--space-sm);
+    border-radius: var(--border-radius-sm);
+}
 
-        .tech-badge {
-            background-color: var(--color-surface);
-            color: var(--color-text);
-            border: var(--border-width) solid var(--color-border);
-            font-size: 0.75rem;
-            font-weight: 500;
-            margin: var(--space-xs);
-        }
+.tech-badge {
+    background-color: var(--color-surface);
+    color: var(--color-text);
+    border: var(--border-width) solid var(--color-border);
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 0.25rem 0.5rem;
+    border-radius: var(--border-radius-sm);
+    margin: var(--space-xs);
+    display: inline-block;
+    transition: all var(--transition-fast);
+}
 
-        /* ==========================================================================
+.tech-badge:hover {
+    background-color: var(--color-gray-200);
+    border-color: var(--color-gray-300);
+}
+
+/* ==========================================================================
            ANIMATIONS
            ========================================================================== */
-        .fade-in {
-            opacity: 0;
-            animation: fadeIn 0.6s ease forwards;
-        }
+.fade-in {
+    opacity: 0;
+    animation: fadeIn 0.6s ease forwards;
+}
 
-        @keyframes fadeIn {
-            to {
-                opacity: 1;
-            }
-        }
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
 
-        .slide-up {
-            transform: translateY(20px);
-            opacity: 0;
-            animation: slideUp 0.6s ease forwards;
-        }
+.slide-up {
+    transform: translateY(20px);
+    opacity: 0;
+    animation: slideUp 0.6s ease forwards;
+}
 
-        @keyframes slideUp {
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
+@keyframes slideUp {
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
 
-        /* ==========================================================================
+/* ==========================================================================
            CONTACT FORM
            ========================================================================== */
-        .form-control:focus {
-            border-color: var(--color-gray-400);
-            box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
-        }
+.form-control:focus {
+    border-color: var(--color-gray-400);
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+}
 
-        /* ==========================================================================
+/* ==========================================================================
            RESPONSIVE DESIGN
            ========================================================================== */
-        @media (max-width: 576px) {
-            .hero-avatar {
-                width: 150px;
-                height: 150px;
-            }
+@media (max-width: 576px) {
+    .hero-avatar {
+        width: 150px;
+        height: 150px;
+    }
 
-            .metric-value {
-                font-size: 1.5rem;
-            }
+    .metric-value {
+        font-size: 1.5rem;
+    }
 
-            .tech-icon {
-                width: 50px;
-                height: 50px;
-                font-size: 20px;
-            }
-        }
+    .tech-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+    }
+}
+
+/* ==========================================================================
+           ENHANCED CAROUSEL CONTROLS
+           ========================================================================== */
+.carousel-control-prev,
+.carousel-control-next {
+    width: 80px;
+    opacity: 0;
+    transition: opacity var(--transition-base);
+}
+
+.gallery-carousel:hover .carousel-control-prev,
+.gallery-carousel:hover .carousel-control-next {
+    opacity: 1;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 50%;
+    width: 3rem;
+    height: 3rem;
+    background-size: 50%;
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: all var(--transition-base);
+}
+
+.carousel-control-prev-icon:hover,
+.carousel-control-next-icon:hover {
+    background-color: var(--color-gray-900);
+    transform: scale(1.1);
+}
+
+/* Left Arrow (Prev) */
+.carousel-control-prev-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='white'%3E%3Cpath d='M11 1L3 8l8 7V1z'/%3E%3C/svg%3E");
+}
+
+/* Right Arrow (Next) */
+.carousel-control-next-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='white'%3E%3Cpath d='M5 1l8 7-8 7V1z'/%3E%3C/svg%3E");
+}
+
+/* Enhanced Carousel Indicators - Dots */
+.carousel-indicators {
+    bottom: 1rem;
+    margin-bottom: 0;
+}
+
+.carousel-indicators [data-bs-target] {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.6);
+    border: 2px solid rgba(0, 0, 0, 0.3);
+    margin: 0 4px;
+    transition: all var(--transition-fast);
+}
+
+.carousel-indicators .active {
+    background-color: var(--color-white);
+    border-color: var(--color-gray-900);
+    transform: scale(1.2);
+}
+
+/* ==========================================================================
+           ENHANCED MODAL STYLING
+           ========================================================================== */
+.modal-dialog {
+    max-width: 1000px;
+}
+
+.modal-content {
+    border: none;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+}
+
+.modal-header {
+    background: linear-gradient(135deg, var(--color-white) 0%, var(--color-gray-50) 100%);
+    border-bottom: 1px solid var(--color-border);
+    padding: 1.5rem 2rem;
+    position: relative;
+}
+
+.modal-title {
+    font-weight: 700;
+    color: var(--color-text);
+    font-size: 1.25rem;
+    margin: 0;
+}
+
+.modal-body {
+    padding: 0;
+    background: var(--color-white);
+    position: relative;
+    min-height: 400px;
+}
+
+/* Enhanced Toggle Buttons */
+.view-toggle {
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-md);
+    padding: 0.25rem;
+    box-shadow: var(--shadow-sm);
+    display: inline-flex;
+}
+
+.view-toggle .btn {
+    border: none;
+    border-radius: var(--border-radius-sm);
+    padding: 0.5rem 1rem;
+    font-weight: 600;
+    font-size: 0.875rem;
+    transition: all var(--transition-fast);
+    background: transparent;
+    color: var(--color-text-muted);
+    position: relative;
+}
+
+.view-toggle .btn:hover {
+    color: var(--color-text);
+    background-color: var(--color-gray-50);
+}
+
+.view-toggle .btn.active {
+    background: var(--color-gray-900);
+    color: var(--color-white);
+    box-shadow: var(--shadow-sm);
+}
+
+.view-toggle .btn:not(.active):hover {
+    background-color: var(--color-gray-100);
+}
+
+/* Legacy button group support for existing HTML */
+.modal-header .btn-group {
+    border-radius: var(--border-radius-md);
+    overflow: hidden;
+}
+
+.modal-header .btn-group .btn {
+    border-radius: 0;
+    border-width: 1px;
+    font-weight: 500;
+    padding: 0.375rem 1rem;
+    transition: all var(--transition-base);
+}
+
+.modal-header .btn-group .btn:first-child {
+    border-top-left-radius: var(--border-radius-md);
+    border-bottom-left-radius: var(--border-radius-md);
+}
+
+.modal-header .btn-group .btn:last-child {
+    border-top-right-radius: var(--border-radius-md);
+    border-bottom-right-radius: var(--border-radius-md);
+}
+
+.modal-header .btn-group .btn.active {
+    background-color: var(--color-gray-900);
+    border-color: var(--color-gray-900);
+    color: var(--color-white);
+}
+
+/* Gallery toggle functionality */
+.gallery-carousel {
+    display: none;
+    opacity: 0;
+    transition: opacity var(--transition-slow);
+}
+
+.gallery-carousel.active {
+    display: block;
+    opacity: 1;
+}
+
+/* Enhanced carousel images */
+.carousel-inner {
+    border-radius: 0;
+}
+
+.carousel-item img {
+    width: 100%;
+    height: 500px;
+    object-fit: contain;
+    background: var(--color-gray-50);
+    transition: transform var(--transition-slow);
+}
+
+.carousel-item {
+    cursor: zoom-in;
+}
+
+.carousel-item:hover img {
+    transform: scale(1.02);
+}
+
+/* Loading State */
+.loading-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--color-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--transition-base);
+}
+
+.loading-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid var(--color-gray-200);
+    border-top: 3px solid var(--color-gray-900);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Close Button Enhancement */
+.btn-close {
+    background-size: 1rem;
+    opacity: 0.7;
+    transition: all var(--transition-fast);
+}
+
+.btn-close:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+/* Mobile responsive enhancements */
+@media (max-width: 768px) {
+    .modal-dialog {
+        margin: 1rem;
+        max-width: calc(100% - 2rem);
+    }
+
+    .modal-header {
+        padding: 1rem;
+    }
+
+    .carousel-item img {
+        height: 300px;
+    }
+
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+        width: 2.5rem;
+        height: 2.5rem;
+    }
+}
