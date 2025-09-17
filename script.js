@@ -205,11 +205,11 @@ function typeWriter(element, text, speed = 80) {
 }
 
 function initializeTypingEffect() {
-    const heroTitle = document.querySelector('.hero-section h1');
-    if (heroTitle) {
-        const originalText = heroTitle.textContent;
+    const element = document.getElementById('typewriter');
+    if (element) {
+        const text = "Macross Abaño";
         setTimeout(() => {
-            typeWriter(heroTitle, originalText, 80);
+            typeWriter(element, text, 80);
         }, 500);
     }
 }
