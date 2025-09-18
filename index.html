@@ -330,10 +330,12 @@
                     </div>
                 </div>
 
-                <!-- Project 2 -->
-                <div class="project-card">
+                <!-- Project 2 - FIXED VERSION -->
+                <div class="project-card" style="cursor: default;">
                     <div class="project-placeholder">
-                        <i class="bi bi-phone" style="font-size: 3rem;"></i>
+                        <img src="images/LibraryManagementSystem/Desktop-HomePage.png" alt="Library Management System"
+                            class="img-fluid rounded" style="max-height: 180px; object-fit: cover; cursor: pointer;"
+                            data-bs-toggle="modal" data-bs-target="#galleryModal2">
                     </div>
                     <div class="p-4">
                         <h5 class="fw-bold mb-2">Library Management System</h5>
@@ -342,6 +344,7 @@
                             cataloging, borrowing, and user management. Includes features like
                             search, borrowing limits, and an admin dashboard for efficient oversight.
                         </p>
+
                         <div class="mb-3">
                             <span class="tech-badge">ASP.NET Core MVC</span>
                             <span class="tech-badge">Entity Framework Core</span>
@@ -353,11 +356,85 @@
 
                         <div class="d-flex gap-2">
                             <a href="#" class="btn btn-dark btn-sm">
-                                <i class="bi bi-eye me-1"></i>Live Demo
-                            </a>
-                            <a href="#" class="btn btn-outline-secondary btn-sm">
                                 <i class="bi bi-github me-1"></i>Code
                             </a>
+                            <button class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal"
+                                data-bs-target="#galleryModal2">
+                                <i class="bi bi-images me-1"></i> View Gallery
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal 2 - FIXED VERSION -->
+                <div class="modal fade" id="galleryModal2" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-lg modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <div class="w-100">
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <h5 class="modal-title mb-0">Library Management System - Screenshots</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="d-flex justify-content-center">
+                                        <div class="btn-group btn-group-sm" role="group" aria-label="View toggle">
+                                            <button type="button" class="btn btn-outline-dark active"
+                                                id="btnDesktop2">Desktop</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-body">
+                                <!-- Desktop Carousel - FIXED -->
+                                <div id="carouselDesktop2" class="carousel slide gallery-carousel active"
+                                    data-bs-ride="carousel">
+                                    <!-- Indicators -->
+                                    <div class="carousel-indicators" id="desktopIndicators2"></div>
+                                    <div class="carousel-inner">
+                                        <div class="carousel-item active">
+                                            <img src="images/LibraryManagementSystem/Desktop-HomePage.png"
+                                                class="d-block w-100 rounded" alt="Home Page">
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img src="images/LibraryManagementSystem/Desktop-BrowseBooks.png"
+                                                class="d-block w-100 rounded" alt="Browse Books">
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img src="images/LibraryManagementSystem/Desktop-BookDetails.png"
+                                                class="d-block w-100 rounded" alt="Book Details">
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img src="images/LibraryManagementSystem/Desktop-MyBorrows.png"
+                                                class="d-block w-100 rounded" alt="My Borrows">
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img src="images/LibraryManagementSystem/Desktop-Dashboard.png"
+                                                class="d-block w-100 rounded" alt="Dashboard">
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img src="images/LibraryManagementSystem/Desktop-ManageBooks.png"
+                                                class="d-block w-100 rounded" alt="Manage Books">
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img src="images/LibraryManagementSystem/Desktop-ManageUser.png"
+                                                class="d-block w-100 rounded" alt="Manage Users">
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img src="images/LibraryManagementSystem/Desktop-UserDetails.png"
+                                                class="d-block w-100 rounded" alt="User Details">
+                                        </div>
+                                    </div>
+                                    <button class="carousel-control-prev" type="button"
+                                        data-bs-target="#carouselDesktop2" data-bs-slide="prev">
+                                        <span class="carousel-control-prev-icon"></span>
+                                    </button>
+                                    <button class="carousel-control-next" type="button"
+                                        data-bs-target="#carouselDesktop2" data-bs-slide="next">
+                                        <span class="carousel-control-next-icon"></span>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -381,11 +458,12 @@
                         </div>
                         <div class="d-flex gap-2">
                             <a href="#" class="btn btn-dark btn-sm">
-                                <i class="bi bi-eye me-1"></i>Live Demo
-                            </a>
-                            <a href="#" class="btn btn-outline-secondary btn-sm">
                                 <i class="bi bi-github me-1"></i>Code
                             </a>
+                            <!-- View Gallery button -->
+                            <button class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#">
+                                <i class="bi bi-images me-1"></i> View Gallery
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -477,41 +555,54 @@
                 <div class="col-lg-8">
                     <div class="row g-4">
                         <div class="col-md-4">
-                            <div class="summary-card text-center h-100">
-                                <i class="bi bi-linkedin mb-3"
-                                    style="font-size: 2rem; color: var(--color-success);"></i>
-                                <h6 class="fw-bold">LinkedIn</h6>
-                                <p class="text-muted small mb-0">www.linkedin.com/in/sac-macross-abaño-2b11a827b</p>
-                            </div>
+                            <a href="https://www.linkedin.com/in/sac-macross-abaño-2b11a827b" target="_blank"
+                                rel="noopener noreferrer" class="text-decoration-none text-dark">
+
+                                <div class="summary-card text-center h-100">
+                                    <i class="bi bi-linkedin mb-3"
+                                        style="font-size: 2rem; color: var(--color-success);"></i>
+                                    <h6 class="fw-bold">LinkedIn</h6>
+                                    <p class="text-muted small mb-0">www.linkedin.com/in/sac-macross-abaño-2b11a827b</p>
+                                </div>
+                            </a>
                         </div>
                         <div class="col-md-4">
-                            <div class="summary-card text-center h-100">
-                                <i class="bi bi-github mb-3" style="font-size: 2rem; color: var(--color-gray-800);"></i>
-                                <h6 class="fw-bold">GitHub</h6>
-                                <p class="text-muted small mb-0">https://github.com/Maaaacc</p>
-                            </div>
+                            <a href="https://github.com/Maaaacc" target="_blank" rel="noopener noreferrer"
+                                class="text-decoration-none text-dark">
+
+                                <div class="summary-card text-center h-100">
+                                    <i class="bi bi-github mb-3"
+                                        style="font-size: 2rem; color: var(--color-gray-800);"></i>
+                                    <h6 class="fw-bold">GitHub</h6>
+                                    <p class="text-muted small mb-0">https://github.com/Maaaacc</p>
+                                </div>
+                            </a>
                         </div>
                     </div>
 
                     <div class="summary-card mt-4">
-                        <form id="contactForm">
+                        <form id="contactForm" action="https://formspree.io/f/xqadrkqn" method="post">
                             <div class="row g-3">
                                 <div class="col-md-6">
                                     <label for="name" class="form-label">Name</label>
-                                    <input type="text" class="form-control" id="name" required>
+                                    <input type="text" class="form-control" id="name" name="name" required>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="email" class="form-label">Email</label>
-                                    <input type="email" class="form-control" id="email" required>
+                                    <input type="email" class="form-control" id="email" name="email" required>
                                 </div>
                                 <div class="col-12">
                                     <label for="subject" class="form-label">Subject</label>
-                                    <input type="text" class="form-control" id="subject" required>
+                                    <input type="text" class="form-control" id="subject" name="subject" required>
                                 </div>
                                 <div class="col-12">
                                     <label for="message" class="form-label">Message</label>
-                                    <textarea class="form-control" id="message" rows="5" required></textarea>
+                                    <textarea class="form-control" id="message" name="message" rows="5"
+                                        required></textarea>
                                 </div>
+
+                                <input type="text" name="_gotcha" style="display:none !important">
+
                                 <div class="col-12 text-center">
                                     <button type="submit" class="btn btn-dark btn-lg">
                                         <i class="bi bi-send me-2"></i>Send Message

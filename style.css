@@ -110,6 +110,16 @@ body {
     padding: var(--space-lg);
 }
 
+.summary-card {
+    cursor: pointer;
+    transition: all var(--transition-base);
+}
+
+a .summary-card:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+}
+
 .summary-card:hover {
     box-shadow: var(--shadow-md);
     transform: translateY(-1px);
@@ -400,13 +410,8 @@ body {
 .carousel-control-prev,
 .carousel-control-next {
     width: 80px;
-    opacity: 0;
-    transition: opacity var(--transition-base);
-}
-
-.gallery-carousel:hover .carousel-control-prev,
-.gallery-carousel:hover .carousel-control-next {
     opacity: 1;
+    transition: opacity var(--transition-base);
 }
 
 .carousel-control-prev-icon,
@@ -419,12 +424,6 @@ body {
     background-repeat: no-repeat;
     background-position: center;
     transition: all var(--transition-base);
-}
-
-.carousel-control-prev-icon:hover,
-.carousel-control-next-icon:hover {
-    background-color: var(--color-gray-900);
-    transform: scale(1.1);
 }
 
 /* Left Arrow (Prev) */
@@ -460,7 +459,7 @@ body {
 }
 
 /* ==========================================================================
-           ENHANCED MODAL STYLING - CLEAN & RESPONSIVE
+           ENHANCED MODAL STYLING - CLEAN & RESPONSIVE (UNIFIED IMAGE SIZES)
            ========================================================================== */
 
 .modal-dialog {
@@ -559,43 +558,80 @@ body {
     box-shadow: var(--shadow-md);
 }
 
-/* Modal Body - Clean Layout */
+/* Modal Body - Fixed Layout to Prevent Shrinking */
 .modal-body {
     padding: 0;
     background: var(--color-white);
     position: relative;
     overflow: hidden;
+    min-height: 660px;
+    /* Fixed minimum height to prevent shrinking */
 }
 
-/* Enhanced Carousel Layout */
+/* Enhanced Carousel Layout - FIXED */
 .gallery-carousel {
-    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
     opacity: 0;
-    transition: opacity var(--transition-slow);
-    position: relative;
+    visibility: hidden;
+    transition: opacity var(--transition-base);
 }
 
 .gallery-carousel.active {
-    display: block;
     opacity: 1;
+    visibility: visible;
 }
 
-/* Carousel Container with Proper Spacing */
+/* Ensure carousel containers maintain consistent size */
+#carouselDesktop,
+#carouselMobile {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Carousel Container with Fixed Height */
 .carousel-inner {
     border-radius: 0;
     background: var(--color-gray-50);
     position: relative;
-    /* Add padding bottom for indicators */
+    height: 660px;
+    /* Fixed height to match modal-body */
     padding-bottom: 3rem;
 }
 
 @media (max-width: 767px) {
+    .modal-body {
+        min-height: 450px;
+    }
+
     .carousel-inner {
+        height: 450px;
         padding-bottom: 2.5rem;
     }
 }
 
-/* Enhanced Carousel Images */
+@media (max-width: 480px) {
+    .modal-body {
+        min-height: 330px;
+    }
+
+    .carousel-inner {
+        height: 330px;
+        padding-bottom: 2rem;
+    }
+}
+
+/* Enhanced Carousel Images - UNIFIED SIZING */
 .carousel-item {
     padding: 1rem;
     cursor: pointer;
@@ -607,16 +643,14 @@ body {
     }
 }
 
-#carouselDesktop .carousel-item img {
-    width: 100%;
-    height: 600px;
-    object-fit: contain;
-    background: var(--color-white);
-    border-radius: var(--border-radius-md);
-    box-shadow: var(--shadow-md);
-    transition: all var(--transition-slow);
+@media (max-width: 480px) {
+    .carousel-item {
+        padding: 0.25rem;
+    }
 }
 
+/* UNIFIED IMAGE SIZING - Both Desktop and Mobile carousels use same dimensions */
+#carouselDesktop .carousel-item img,
 #carouselMobile .carousel-item img {
     width: 100%;
     height: 600px;
@@ -627,9 +661,28 @@ body {
     transition: all var(--transition-slow);
 }
 
+/* Responsive adjustments for both carousel types */
+@media (max-width: 767px) {
+
+    #carouselDesktop .carousel-item img,
+    #carouselMobile .carousel-item img {
+        height: 350px;
+        border-radius: var(--border-radius-sm);
+    }
+}
+
+@media (max-width: 480px) {
+
+    #carouselDesktop .carousel-item img,
+    #carouselMobile .carousel-item img {
+        height: 250px;
+    }
+}
+
+/* Fallback for any other carousel images */
 .carousel-item img {
     width: 100%;
-    height: 500px;
+    height: 600px;
     object-fit: contain;
     background: var(--color-white);
     border-radius: var(--border-radius-md);
@@ -638,31 +691,20 @@ body {
 }
 
 @media (max-width: 767px) {
-    #carouselDesktop .carousel-item img {
-        height: 400px;
-        /* Smaller on mobile devices */
-        border-radius: var(--border-radius-sm);
-    }
-
-    #carouselMobile .carousel-item img {
+    .carousel-item img {
         height: 350px;
-        /* Smaller on mobile devices */
         border-radius: var(--border-radius-sm);
     }
 }
 
 @media (max-width: 480px) {
-    #carouselDesktop .carousel-item img {
-        height: 300px;
-    }
-
-    #carouselMobile .carousel-item img {
-        height: 280px;
+    .carousel-item img {
+        height: 250px;
     }
 }
 
 .carousel-item:hover img {
-    transform: scale(1.02);
+    transform: scale(1.01);
     box-shadow: var(--shadow-lg);
 }
 
@@ -670,14 +712,9 @@ body {
 .carousel-control-prev,
 .carousel-control-next {
     width: 60px;
-    opacity: 0;
+    opacity: 1;
     transition: all var(--transition-base);
     z-index: 5;
-}
-
-.gallery-carousel:hover .carousel-control-prev,
-.gallery-carousel:hover .carousel-control-next {
-    opacity: 1;
 }
 
 @media (max-width: 767px) {
@@ -901,24 +938,8 @@ body {
         font-size: 0.75rem;
     }
 
-    .carousel-item {
-        padding: 0.25rem;
-    }
-
     .carousel-indicators {
         bottom: 0.25rem;
         padding: 0.25rem 0.5rem;
-    }
-}
-
-/* Prevent content overflow */
-.modal-body {
-    max-height: 80vh;
-    overflow: hidden;
-}
-
-@media (max-width: 767px) {
-    .modal-body {
-        max-height: 70vh;
     }
 }

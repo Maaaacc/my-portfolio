@@ -1,28 +1,48 @@
 /* ==========================================================================
-   MACROSS ABAÑO PORTFOLIO - OPTIMIZED JAVASCRIPT
+   MACROSS ABAÑO PORTFOLIO - OPTIMIZED JAVASCRIPT (FIXED SCROLL)
    ========================================================================== */
 
 /* ==========================================================================
    1. NAVIGATION FUNCTIONALITY
    ========================================================================== */
 
-// Smooth scrolling for navigation links
+// Smooth scrolling for navigation links - MOBILE FIXED VERSION
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
         if (target) {
-            const navbarHeight = document.querySelector('.navbar').offsetHeight;
-            const targetPosition = target.offsetTop - navbarHeight;
-            window.scrollTo({
-                top: targetPosition,
-                behavior: 'smooth'
-            });
+            const navbar = document.querySelector('.navbar');
+            const navbarCollapse = document.querySelector('.navbar-collapse');
+            const isMobileMenuOpen = navbarCollapse.classList.contains('show');
+
+            // On mobile, if menu is open, it will close, so use collapsed height
+            // On desktop or when menu is already closed, use current height
+            const navbarHeight = isMobileMenuOpen ?
+                navbar.querySelector('.navbar-brand').offsetHeight + 32 : // Approximate collapsed height
+                navbar.offsetHeight;
+
+            const targetPosition = target.offsetTop - navbarHeight - 10;
+
+            // If mobile menu is open, add a small delay to account for closing animation
+            if (isMobileMenuOpen) {
+                setTimeout(() => {
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }, 100); // Small delay for navbar collapse animation
+            } else {
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            }
         }
     });
 });
 
-// Active navigation highlighting
+// Active navigation highlighting - UPDATED
 window.addEventListener('scroll', () => {
     const sections = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('.nav-link');
@@ -30,7 +50,8 @@ window.addEventListener('scroll', () => {
 
     let current = '';
     sections.forEach(section => {
-        const sectionTop = section.offsetTop - navbarHeight - 100;
+        // Fixed: Reduced the buffer from 100px to 20px for more accurate detection
+        const sectionTop = section.offsetTop - navbarHeight - 20;
         const sectionHeight = section.clientHeight;
         if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
             current = section.getAttribute('id');
@@ -75,36 +96,85 @@ document.querySelectorAll('.navbar-nav .nav-link').forEach(link => {
    2. CONTACT FORM HANDLING
    ========================================================================== */
 
-document.getElementById('contactForm').addEventListener('submit', function (e) {
-    e.preventDefault();
+document.addEventListener('DOMContentLoaded', function () {
+    const contactForm = document.getElementById('contactForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const successMessage = document.getElementById('successMessage');
+    const errorMessage = document.getElementById('errorMessage');
 
-    const submitBtn = this.querySelector('button[type="submit"]');
-    const originalText = submitBtn.innerHTML;
+    if (contactForm && submitBtn) {
+        contactForm.addEventListener('submit', async function (e) {
+            e.preventDefault();
 
-    // Update button state
-    submitBtn.innerHTML = '<i class="bi bi-hourglass-split me-2"></i>Sending...';
-    submitBtn.disabled = true;
+            // Hide any existing messages
+            successMessage.classList.add('d-none');
+            errorMessage.classList.add('d-none');
 
-    // Simulate form submission
-    setTimeout(() => {
-        submitBtn.innerHTML = '<i class="bi bi-check-circle me-2"></i>Message Sent!';
-        submitBtn.classList.remove('btn-dark');
-        submitBtn.classList.add('btn-success');
+            // Update button state
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="bi bi-hourglass-split me-2"></i>Sending...';
+            submitBtn.disabled = true;
 
-        this.reset();
+            // Get form data
+            const formData = new FormData(contactForm);
 
-        // Reset button after 3 seconds
-        setTimeout(() => {
-            submitBtn.innerHTML = originalText;
-            submitBtn.disabled = false;
-            submitBtn.classList.remove('btn-success');
-            submitBtn.classList.add('btn-dark');
-        }, 3000);
-    }, 2000);
+            try {
+                // Send to Formspree
+                const response = await fetch(contactForm.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    // Success
+                    submitBtn.innerHTML = '<i class="bi bi-check-circle me-2"></i>Message Sent!';
+                    submitBtn.classList.remove('btn-dark');
+                    submitBtn.classList.add('btn-success');
+
+                    // Show success message
+                    successMessage.classList.remove('d-none');
+
+                    // Reset form
+                    contactForm.reset();
+
+                    // Scroll to success message
+                    successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+                } else {
+                    throw new Error('Form submission failed');
+                }
+
+            } catch (error) {
+                console.error('Error:', error);
+
+                // Show error
+                submitBtn.innerHTML = '<i class="bi bi-x-circle me-2"></i>Send Failed';
+                submitBtn.classList.remove('btn-dark');
+                submitBtn.classList.add('btn-danger');
+
+                // Show error message
+                errorMessage.classList.remove('d-none');
+
+                // Scroll to error message
+                errorMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+
+            // Reset button after 3 seconds
+            setTimeout(() => {
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+                submitBtn.classList.remove('btn-success', 'btn-danger');
+                submitBtn.classList.add('btn-dark');
+            }, 3000);
+        });
+    }
 });
 
 /* ==========================================================================
-   3. CAROUSEL FUNCTIONALITY
+   3. CAROUSEL FUNCTIONALITY - COMPLETE FIXED VERSION
    ========================================================================== */
 
 // Generate carousel indicators dynamically
@@ -132,12 +202,15 @@ function initializeCarouselIndicators(carouselId, indicatorsId) {
     }
 }
 
-// Gallery toggle functionality
-function initializeGalleryToggle() {
-    const btnDesktop = document.getElementById("btnDesktop");
-    const btnMobile = document.getElementById("btnMobile");
-    const carouselDesktop = document.getElementById("carouselDesktop");
-    const carouselMobile = document.getElementById("carouselMobile");
+// Gallery toggle functionality for Modal 1
+function initializeModal1Toggle() {
+    const modal1 = document.getElementById('galleryModal1');
+    if (!modal1) return;
+
+    const btnDesktop = modal1.querySelector('#btnDesktop');
+    const btnMobile = modal1.querySelector('#btnMobile');
+    const carouselDesktop = modal1.querySelector('#carouselDesktop');
+    const carouselMobile = modal1.querySelector('#carouselMobile');
 
     if (!btnDesktop || !btnMobile || !carouselDesktop || !carouselMobile) {
         return;
@@ -162,6 +235,22 @@ function initializeGalleryToggle() {
 
     // Initialize with desktop view
     switchToDesktop();
+}
+
+// Gallery toggle functionality for Modal 2
+function initializeModal2Toggle() {
+    const modal2 = document.getElementById('galleryModal2');
+    if (!modal2) return;
+
+    const btnDesktop2 = modal2.querySelector('#btnDesktop2');
+    const carouselDesktop2 = modal2.querySelector('#carouselDesktop2');
+
+    if (btnDesktop2 && carouselDesktop2) {
+        btnDesktop2.addEventListener('click', function () {
+            btnDesktop2.classList.add('active');
+            carouselDesktop2.classList.add('active');
+        });
+    }
 }
 
 /* ==========================================================================
@@ -220,23 +309,72 @@ function initializeTypingEffect() {
 
 // Initialize everything when DOM is loaded
 document.addEventListener("DOMContentLoaded", function () {
-    initializeCarouselIndicators('#carouselDesktop', '#desktopIndicators');
-    initializeCarouselIndicators('#carouselMobile', '#mobileIndicators');
-    initializeGalleryToggle();
-    // initializeScrollAnimations();
-});
-
-// Initialize typing effect when page loads
-window.addEventListener('load', () => {
+    // Initialize typing effect
     initializeTypingEffect();
+
+    // Initialize scroll animations (uncomment if needed)
+    // initializeScrollAnimations();
+
+    // Initialize modal toggles
+    initializeModal1Toggle();
+    initializeModal2Toggle();
 });
 
-// Re-initialize gallery toggle when modal is shown
+// Modal event handlers - FIXED VERSION
 document.addEventListener('DOMContentLoaded', function () {
-    const galleryModal = document.getElementById('galleryModal1');
-    if (galleryModal) {
-        galleryModal.addEventListener('shown.bs.modal', function () {
-            initializeGalleryToggle();
+    // Modal 1 Event Handlers
+    const galleryModal1 = document.getElementById('galleryModal1');
+    if (galleryModal1) {
+        // Initialize indicators when modal is shown
+        galleryModal1.addEventListener('shown.bs.modal', function () {
+            initializeCarouselIndicators('#carouselDesktop', '#desktopIndicators');
+            initializeCarouselIndicators('#carouselMobile', '#mobileIndicators');
+            initializeModal1Toggle();
+        });
+
+        // Reset modal state when it's hidden (closed)
+        galleryModal1.addEventListener('hidden.bs.modal', function () {
+            const btnDesktop = galleryModal1.querySelector('#btnDesktop');
+            const btnMobile = galleryModal1.querySelector('#btnMobile');
+            const carouselDesktop = galleryModal1.querySelector('#carouselDesktop');
+            const carouselMobile = galleryModal1.querySelector('#carouselMobile');
+
+            if (btnDesktop && btnMobile && carouselDesktop && carouselMobile) {
+                // Reset to desktop view without animation
+                btnDesktop.classList.add("active");
+                btnMobile.classList.remove("active");
+                carouselDesktop.classList.add("active");
+                carouselMobile.classList.remove("active");
+
+                // Reset both carousels to first slide
+                if (typeof bootstrap !== 'undefined') {
+                    const desktopCarousel = new bootstrap.Carousel(carouselDesktop);
+                    const mobileCarousel = new bootstrap.Carousel(carouselMobile);
+                    desktopCarousel.to(0);
+                    mobileCarousel.to(0);
+                }
+            }
+        });
+    }
+
+    // Modal 2 Event Handlers
+    const galleryModal2 = document.getElementById('galleryModal2');
+    if (galleryModal2) {
+        // Initialize indicators when modal is shown
+        galleryModal2.addEventListener('shown.bs.modal', function () {
+            initializeCarouselIndicators('#carouselDesktop2', '#desktopIndicators2');
+            initializeModal2Toggle();
+        });
+
+        // Reset modal state when it's hidden (closed)
+        galleryModal2.addEventListener('hidden.bs.modal', function () {
+            const carouselDesktop2 = galleryModal2.querySelector('#carouselDesktop2');
+
+            if (carouselDesktop2 && typeof bootstrap !== 'undefined') {
+                // Reset carousel to first slide
+                const carousel = new bootstrap.Carousel(carouselDesktop2);
+                carousel.to(0);
+            }
         });
     }
 });
