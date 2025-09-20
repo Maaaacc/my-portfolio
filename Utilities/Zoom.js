@@ -1,21 +1,30 @@
+// Disable carousel swipe
+const carouselEl = document.querySelector('#carouselLibrary');
+new bootstrap.Carousel(carouselEl, {
+    interval: false,
+    touch: false
+});
+
 document.querySelectorAll('.carousel-item img').forEach(img => {
     let scale = 1, posX = 0, posY = 0;
     let startX = 0, startY = 0;
     let isDragging = false;
 
-    let initialDistance = 0; // for pinch zoom
+    let initialDistance = 0;
     let pinchStartScale = 1;
+
+    let touchStartX = 0;
+    let touchStartY = 0;
 
     const maxScale = 3;
     const minScale = 1;
 
-    function constrainPan() {
-        const container = img.parentElement;
-        const rect = container.getBoundingClientRect();
+    const container = img.parentElement;
 
+    function constrainPan() {
+        const rect = container.getBoundingClientRect();
         const imgWidth = img.clientWidth * scale;
         const imgHeight = img.clientHeight * scale;
-
         const maxX = Math.max(0, (imgWidth - rect.width) / 2);
         const maxY = Math.max(0, (imgHeight - rect.height) / 2);
 
@@ -36,8 +45,8 @@ document.querySelectorAll('.carousel-item img').forEach(img => {
 
         const zoomSpeed = 0.1;
         const oldScale = scale;
-        if (e.deltaY < 0) scale = Math.min(scale + zoomSpeed, maxScale);
-        else scale = Math.max(scale - zoomSpeed, minScale);
+        scale += e.deltaY < 0 ? zoomSpeed : -zoomSpeed;
+        scale = Math.min(maxScale, Math.max(minScale, scale));
 
         const rect = img.getBoundingClientRect();
         const dx = e.clientX - (rect.left + rect.width / 2);
@@ -61,7 +70,7 @@ document.querySelectorAll('.carousel-item img').forEach(img => {
         img.style.transition = 'none';
     });
 
-    img.parentElement.addEventListener('mousemove', e => {
+    container.addEventListener('mousemove', e => {
         if (!isDragging) return;
         posX = e.clientX - startX;
         posY = e.clientY - startY;
@@ -76,25 +85,28 @@ document.querySelectorAll('.carousel-item img').forEach(img => {
         img.style.transition = 'transform 0.1s ease';
     });
 
-    // Mobile: pinch-to-zoom and drag
+    // Mobile: touch handling
     img.addEventListener('touchstart', e => {
         if (e.touches.length === 2) {
-            // Pinch start
             const dx = e.touches[0].clientX - e.touches[1].clientX;
             const dy = e.touches[0].clientY - e.touches[1].clientY;
             initialDistance = Math.hypot(dx, dy);
             pinchStartScale = scale;
         } else if (e.touches.length === 1 && scale > 1) {
-            // Single finger drag
             isDragging = true;
             startX = e.touches[0].clientX - posX;
             startY = e.touches[0].clientY - posY;
+        }
+
+        if (e.touches.length === 1) {
+            touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY;
         }
     }, { passive: false });
 
     img.addEventListener('touchmove', e => {
         if (e.touches.length === 2) {
-            e.preventDefault(); // pinch zoom
+            e.preventDefault();
             const dx = e.touches[0].clientX - e.touches[1].clientX;
             const dy = e.touches[0].clientY - e.touches[1].clientY;
             const distance = Math.hypot(dx, dy);
@@ -112,8 +124,18 @@ document.querySelectorAll('.carousel-item img').forEach(img => {
     }, { passive: false });
 
     img.addEventListener('touchend', e => {
-        if (e.touches.length === 0) {
-            isDragging = false;
+        if (e.touches.length === 0) isDragging = false;
+
+        if (e.changedTouches.length === 1) {
+            const dx = e.changedTouches[0].clientX - touchStartX;
+            const dy = e.changedTouches[0].clientY - touchStartY;
+            if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 30) {
+                // Swipe attempt: reset zoom
+                scale = 1;
+                posX = 0;
+                posY = 0;
+                updateTransform();
+            }
         }
     });
 
