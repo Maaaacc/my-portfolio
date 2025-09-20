@@ -1,9 +1,10 @@
 // Disable carousel swipe
 const carouselEl = document.querySelector('#carouselLibrary');
 new bootstrap.Carousel(carouselEl, {
-    interval: false,
-    touch: false
+    interval: 5000, // 5 seconds
+    touch: false     // disables swipe
 });
+
 
 document.querySelectorAll('.carousel-item img').forEach(img => {
     let scale = 1, posX = 0, posY = 0;
@@ -87,6 +88,8 @@ document.querySelectorAll('.carousel-item img').forEach(img => {
 
     // Mobile: touch handling
     img.addEventListener('touchstart', e => {
+        e.stopPropagation();
+
         if (e.touches.length === 2) {
             const dx = e.touches[0].clientX - e.touches[1].clientX;
             const dy = e.touches[0].clientY - e.touches[1].clientY;
@@ -105,6 +108,8 @@ document.querySelectorAll('.carousel-item img').forEach(img => {
     }, { passive: false });
 
     img.addEventListener('touchmove', e => {
+        e.stopPropagation();
+
         if (e.touches.length === 2) {
             e.preventDefault();
             const dx = e.touches[0].clientX - e.touches[1].clientX;
@@ -124,6 +129,8 @@ document.querySelectorAll('.carousel-item img').forEach(img => {
     }, { passive: false });
 
     img.addEventListener('touchend', e => {
+        e.stopPropagation();
+
         if (e.touches.length === 0) isDragging = false;
 
         if (e.changedTouches.length === 1) {
@@ -137,7 +144,7 @@ document.querySelectorAll('.carousel-item img').forEach(img => {
                 updateTransform();
             }
         }
-    });
+    }, { passive: false });
 
     // Reset on modal close
     const modal = img.closest('.modal');
