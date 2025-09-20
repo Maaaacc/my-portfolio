@@ -22,7 +22,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 navbar.querySelector('.navbar-brand').offsetHeight + 32 : // Approximate collapsed height
                 navbar.offsetHeight;
 
-            const targetPosition = target.offsetTop - navbarHeight - 10;
+            const targetPosition = target.offsetTop - navbarHeight;
 
             // If mobile menu is open, add a small delay to account for closing animation
             if (isMobileMenuOpen) {
@@ -173,85 +173,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
-/* ==========================================================================
-   3. CAROUSEL FUNCTIONALITY - COMPLETE FIXED VERSION
-   ========================================================================== */
 
-// Generate carousel indicators dynamically
-function initializeCarouselIndicators(carouselId, indicatorsId) {
-    const carousel = document.querySelector(`${carouselId} .carousel-inner`);
-    const indicators = document.querySelector(indicatorsId);
-
-    if (carousel && indicators) {
-        indicators.innerHTML = ''; // Clear existing indicators
-
-        [...carousel.children].forEach((_, index) => {
-            const button = document.createElement('button');
-            button.type = 'button';
-            button.dataset.bsTarget = carouselId;
-            button.dataset.bsSlideTo = index;
-            button.setAttribute('aria-label', `Slide ${index + 1}`);
-
-            if (index === 0) {
-                button.classList.add('active');
-                button.setAttribute('aria-current', 'true');
-            }
-
-            indicators.appendChild(button);
-        });
-    }
-}
-
-// Gallery toggle functionality for Modal 1
-function initializeModal1Toggle() {
-    const modal1 = document.getElementById('galleryModal1');
-    if (!modal1) return;
-
-    const btnDesktop = modal1.querySelector('#btnDesktop');
-    const btnMobile = modal1.querySelector('#btnMobile');
-    const carouselDesktop = modal1.querySelector('#carouselDesktop');
-    const carouselMobile = modal1.querySelector('#carouselMobile');
-
-    if (!btnDesktop || !btnMobile || !carouselDesktop || !carouselMobile) {
-        return;
-    }
-
-    function switchToDesktop() {
-        btnDesktop.classList.add("active");
-        btnMobile.classList.remove("active");
-        carouselMobile.classList.remove("active");
-        setTimeout(() => carouselDesktop.classList.add("active"), 150);
-    }
-
-    function switchToMobile() {
-        btnMobile.classList.add("active");
-        btnDesktop.classList.remove("active");
-        carouselDesktop.classList.remove("active");
-        setTimeout(() => carouselMobile.classList.add("active"), 150);
-    }
-
-    btnDesktop.addEventListener("click", switchToDesktop);
-    btnMobile.addEventListener("click", switchToMobile);
-
-    // Initialize with desktop view
-    switchToDesktop();
-}
-
-// Gallery toggle functionality for Modal 2
-function initializeModal2Toggle() {
-    const modal2 = document.getElementById('galleryModal2');
-    if (!modal2) return;
-
-    const btnDesktop2 = modal2.querySelector('#btnDesktop2');
-    const carouselDesktop2 = modal2.querySelector('#carouselDesktop2');
-
-    if (btnDesktop2 && carouselDesktop2) {
-        btnDesktop2.addEventListener('click', function () {
-            btnDesktop2.classList.add('active');
-            carouselDesktop2.classList.add('active');
-        });
-    }
-}
 
 /* ==========================================================================
    4. ANIMATIONS & EFFECTS
@@ -312,69 +234,5 @@ document.addEventListener("DOMContentLoaded", function () {
     // Initialize typing effect
     initializeTypingEffect();
 
-    // Initialize scroll animations (uncomment if needed)
-    // initializeScrollAnimations();
 
-    // Initialize modal toggles
-    initializeModal1Toggle();
-    initializeModal2Toggle();
-});
-
-// Modal event handlers - FIXED VERSION
-document.addEventListener('DOMContentLoaded', function () {
-    // Modal 1 Event Handlers
-    const galleryModal1 = document.getElementById('galleryModal1');
-    if (galleryModal1) {
-        // Initialize indicators when modal is shown
-        galleryModal1.addEventListener('shown.bs.modal', function () {
-            initializeCarouselIndicators('#carouselDesktop', '#desktopIndicators');
-            initializeCarouselIndicators('#carouselMobile', '#mobileIndicators');
-            initializeModal1Toggle();
-        });
-
-        // Reset modal state when it's hidden (closed)
-        galleryModal1.addEventListener('hidden.bs.modal', function () {
-            const btnDesktop = galleryModal1.querySelector('#btnDesktop');
-            const btnMobile = galleryModal1.querySelector('#btnMobile');
-            const carouselDesktop = galleryModal1.querySelector('#carouselDesktop');
-            const carouselMobile = galleryModal1.querySelector('#carouselMobile');
-
-            if (btnDesktop && btnMobile && carouselDesktop && carouselMobile) {
-                // Reset to desktop view without animation
-                btnDesktop.classList.add("active");
-                btnMobile.classList.remove("active");
-                carouselDesktop.classList.add("active");
-                carouselMobile.classList.remove("active");
-
-                // Reset both carousels to first slide
-                if (typeof bootstrap !== 'undefined') {
-                    const desktopCarousel = new bootstrap.Carousel(carouselDesktop);
-                    const mobileCarousel = new bootstrap.Carousel(carouselMobile);
-                    desktopCarousel.to(0);
-                    mobileCarousel.to(0);
-                }
-            }
-        });
-    }
-
-    // Modal 2 Event Handlers
-    const galleryModal2 = document.getElementById('galleryModal2');
-    if (galleryModal2) {
-        // Initialize indicators when modal is shown
-        galleryModal2.addEventListener('shown.bs.modal', function () {
-            initializeCarouselIndicators('#carouselDesktop2', '#desktopIndicators2');
-            initializeModal2Toggle();
-        });
-
-        // Reset modal state when it's hidden (closed)
-        galleryModal2.addEventListener('hidden.bs.modal', function () {
-            const carouselDesktop2 = galleryModal2.querySelector('#carouselDesktop2');
-
-            if (carouselDesktop2 && typeof bootstrap !== 'undefined') {
-                // Reset carousel to first slide
-                const carousel = new bootstrap.Carousel(carouselDesktop2);
-                carousel.to(0);
-            }
-        });
-    }
 });
