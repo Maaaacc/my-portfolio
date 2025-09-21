@@ -502,3 +502,8 @@ a .summary-card:hover {
     pointer-events: auto;
     /* allow pointer for your JS while dragging */
 }
+
+/* Optional: change cursor on hover */
+.glightbox img {
+    cursor: zoom-in;
+}
