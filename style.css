@@ -156,7 +156,15 @@ a .summary-card:hover {
     transition: all var(--transition-base);
     padding: var(--space-lg);
     text-align: center;
+    height: 100%;
+    /* 👈 ensures card stretches fully */
+    display: flex;
+    flex-direction: column;
+    /* keeps content stacked */
+    justify-content: space-between;
+    /* balances spacing */
 }
+
 
 .skill-card:hover {
     box-shadow: var(--shadow-md);
@@ -428,6 +436,7 @@ a .summary-card:hover {
     width: 3rem;
     height: 3rem;
     background-size: 50%;
+    opacity: 0.5;
     background-repeat: no-repeat;
     background-position: center;
     transition: all var(--transition-base);
@@ -471,7 +480,7 @@ a .summary-card:hover {
 
 .carousel-item img {
     transition: transform 0.1s ease;
-    max-height: 80vh;
+    max-height: 70vh;
     object-fit: contain;
     cursor: grab;
     user-select: none;

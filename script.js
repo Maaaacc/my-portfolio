@@ -1,56 +1,40 @@
-/* ==========================================================================
-   MACROSS ABAÑO PORTFOLIO - OPTIMIZED JAVASCRIPT (FIXED SCROLL)
-   ========================================================================== */
+/* =========================================================
+   1. SMOOTH SCROLL & NAVBAR
+   ========================================================= */
 
-/* ==========================================================================
-   1. NAVIGATION FUNCTIONALITY
-   ========================================================================== */
-
-// Smooth scrolling for navigation links - MOBILE FIXED VERSION
+// Smooth scrolling for anchor links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            const navbar = document.querySelector('.navbar');
-            const navbarCollapse = document.querySelector('.navbar-collapse');
-            const isMobileMenuOpen = navbarCollapse.classList.contains('show');
+        if (!target) return;
 
-            // On mobile, if menu is open, it will close, so use collapsed height
-            // On desktop or when menu is already closed, use current height
-            const navbarHeight = isMobileMenuOpen ?
-                navbar.querySelector('.navbar-brand').offsetHeight + 32 : // Approximate collapsed height
-                navbar.offsetHeight;
+        const navbar = document.querySelector('.navbar');
+        const navbarCollapse = document.querySelector('.navbar-collapse');
+        const isMobileMenuOpen = navbarCollapse.classList.contains('show');
 
-            const targetPosition = target.offsetTop - navbarHeight;
+        const navbarHeight = isMobileMenuOpen
+            ? navbar.querySelector('.navbar-brand').offsetHeight + 32
+            : navbar.offsetHeight;
 
-            // If mobile menu is open, add a small delay to account for closing animation
-            if (isMobileMenuOpen) {
-                setTimeout(() => {
-                    window.scrollTo({
-                        top: targetPosition,
-                        behavior: 'smooth'
-                    });
-                }, 100); // Small delay for navbar collapse animation
-            } else {
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
-                });
-            }
+        const targetPosition = target.offsetTop - navbarHeight;
+
+        if (isMobileMenuOpen) {
+            setTimeout(() => window.scrollTo({ top: targetPosition, behavior: 'smooth' }), 100);
+        } else {
+            window.scrollTo({ top: targetPosition, behavior: 'smooth' });
         }
     });
 });
 
-// Active navigation highlighting - UPDATED
+// Highlight active nav links on scroll
 window.addEventListener('scroll', () => {
     const sections = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('.nav-link');
     const navbarHeight = document.querySelector('.navbar').offsetHeight;
-
     let current = '';
+
     sections.forEach(section => {
-        // Fixed: Reduced the buffer from 100px to 20px for more accurate detection
         const sectionTop = section.offsetTop - navbarHeight - 20;
         const sectionHeight = section.clientHeight;
         if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
@@ -59,14 +43,11 @@ window.addEventListener('scroll', () => {
     });
 
     navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === `#${current}`) {
-            link.classList.add('active');
-        }
+        link.classList.toggle('active', link.getAttribute('href') === `#${current}`);
     });
 });
 
-// Navbar background on scroll
+// Navbar background and shadow on scroll
 window.addEventListener('scroll', () => {
     const navbar = document.querySelector('.navbar');
     if (window.scrollY > 50) {
@@ -80,21 +61,19 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// Mobile menu close on link click
+// Close mobile menu when a nav link is clicked
 document.querySelectorAll('.navbar-nav .nav-link').forEach(link => {
     link.addEventListener('click', () => {
         const navbarToggler = document.querySelector('.navbar-toggler');
         const navbarCollapse = document.querySelector('.navbar-collapse');
-
-        if (navbarCollapse.classList.contains('show')) {
-            navbarToggler.click();
-        }
+        if (navbarCollapse.classList.contains('show')) navbarToggler.click();
     });
 });
 
-/* ==========================================================================
+
+/* =========================================================
    2. CONTACT FORM HANDLING
-   ========================================================================== */
+   ========================================================= */
 
 document.addEventListener('DOMContentLoaded', function () {
     const contactForm = document.getElementById('contactForm');
@@ -102,90 +81,62 @@ document.addEventListener('DOMContentLoaded', function () {
     const successMessage = document.getElementById('successMessage');
     const errorMessage = document.getElementById('errorMessage');
 
-    if (contactForm && submitBtn) {
-        contactForm.addEventListener('submit', async function (e) {
-            e.preventDefault();
+    if (!contactForm || !submitBtn) return;
 
-            // Hide any existing messages
-            successMessage.classList.add('d-none');
-            errorMessage.classList.add('d-none');
+    contactForm.addEventListener('submit', async function (e) {
+        e.preventDefault();
 
-            // Update button state
-            const originalText = submitBtn.innerHTML;
-            submitBtn.innerHTML = '<i class="bi bi-hourglass-split me-2"></i>Sending...';
-            submitBtn.disabled = true;
+        successMessage.classList.add('d-none');
+        errorMessage.classList.add('d-none');
 
-            // Get form data
-            const formData = new FormData(contactForm);
+        const originalText = submitBtn.innerHTML;
+        submitBtn.innerHTML = '<i class="bi bi-hourglass-split me-2"></i>Sending...';
+        submitBtn.disabled = true;
 
-            try {
-                // Send to Formspree
-                const response = await fetch(contactForm.action, {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'Accept': 'application/json'
-                    }
-                });
+        const formData = new FormData(contactForm);
 
-                if (response.ok) {
-                    // Success
-                    submitBtn.innerHTML = '<i class="bi bi-check-circle me-2"></i>Message Sent!';
-                    submitBtn.classList.remove('btn-dark');
-                    submitBtn.classList.add('btn-success');
+        try {
+            const response = await fetch(contactForm.action, {
+                method: 'POST',
+                body: formData,
+                headers: { 'Accept': 'application/json' }
+            });
 
-                    // Show success message
-                    successMessage.classList.remove('d-none');
+            if (!response.ok) throw new Error('Form submission failed');
 
-                    // Reset form
-                    contactForm.reset();
+            // Success
+            submitBtn.innerHTML = '<i class="bi bi-check-circle me-2"></i>Message Sent!';
+            submitBtn.classList.replace('btn-dark', 'btn-success');
+            successMessage.classList.remove('d-none');
+            contactForm.reset();
+            successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
-                    // Scroll to success message
-                    successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } catch (error) {
+            console.error(error);
+            submitBtn.innerHTML = '<i class="bi bi-x-circle me-2"></i>Send Failed';
+            submitBtn.classList.replace('btn-dark', 'btn-danger');
+            errorMessage.classList.remove('d-none');
+            errorMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
 
-                } else {
-                    throw new Error('Form submission failed');
-                }
-
-            } catch (error) {
-                console.error('Error:', error);
-
-                // Show error
-                submitBtn.innerHTML = '<i class="bi bi-x-circle me-2"></i>Send Failed';
-                submitBtn.classList.remove('btn-dark');
-                submitBtn.classList.add('btn-danger');
-
-                // Show error message
-                errorMessage.classList.remove('d-none');
-
-                // Scroll to error message
-                errorMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }
-
-            // Reset button after 3 seconds
-            setTimeout(() => {
-                submitBtn.innerHTML = originalText;
-                submitBtn.disabled = false;
-                submitBtn.classList.remove('btn-success', 'btn-danger');
-                submitBtn.classList.add('btn-dark');
-            }, 3000);
-        });
-    }
+        // Reset button after 3 seconds
+        setTimeout(() => {
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+            submitBtn.classList.remove('btn-success', 'btn-danger');
+            submitBtn.classList.add('btn-dark');
+        }, 3000);
+    });
 });
 
 
+/* =========================================================
+   3. ANIMATIONS & EFFECTS
+   ========================================================= */
 
-/* ==========================================================================
-   4. ANIMATIONS & EFFECTS
-   ========================================================================== */
-
-// Intersection Observer for fade-in animations
+// Fade-in animations using Intersection Observer
 function initializeScrollAnimations() {
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-
+    const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -204,11 +155,9 @@ function initializeScrollAnimations() {
 function typeWriter(element, text, speed = 80) {
     let i = 0;
     element.textContent = '';
-
     function type() {
         if (i < text.length) {
-            element.textContent += text.charAt(i);
-            i++;
+            element.textContent += text.charAt(i++);
             setTimeout(type, speed);
         }
     }
@@ -217,23 +166,24 @@ function typeWriter(element, text, speed = 80) {
 
 function initializeTypingEffect() {
     const element = document.getElementById('typewriter');
-    if (element) {
-        const text = "Macross Abaño";
-        setTimeout(() => {
-            typeWriter(element, text, 80);
-        }, 500);
-    }
+    if (element) setTimeout(() => typeWriter(element, "Macross Abaño", 80), 500);
 }
 
-/* ==========================================================================
-   5. INITIALIZATION
-   ========================================================================== */
 
-// Initialize everything when DOM is loaded
+/* =========================================================
+   4. INITIALIZATION
+   ========================================================= */
+
 document.addEventListener("DOMContentLoaded", function () {
-    // Initialize typing effect
     initializeTypingEffect();
+    initializeScrollAnimations();
 
-
+    // Initialize GLightbox for all gallery links
+    GLightbox({
+        selector: '.glightbox',
+        touchNavigation: true,
+        loop: true,
+        zoomable: true,
+        draggable: true,
+    });
 });
-
