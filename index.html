@@ -383,7 +383,7 @@
 
                 <!-- Modal 2 - Library Management System -->
                 <div class="modal fade" id="galleryModal2" tabindex="-1" aria-hidden="true">
-                    <div class="modal-dialog modal-lg modal-dialog-centered">
+                    <div class="modal-dialog modal-xl modal-dialog-centered">
                         <div class="modal-content">
 
                             <div class="modal-header">
@@ -392,35 +392,117 @@
                             </div>
 
                             <div class="modal-body">
-                                <div class="row g-2">
-                                    <div class="col-6 col-md-3">
-                                        <a href="images/LibraryManagementSystem/Desktop/FP-BrowseBooks.png"
-                                            class="glightbox" data-gallery="library">
-                                            <img class="img-fluid rounded"
-                                                src="images/LibraryManagementSystem/Desktop/FP-BrowseBooks.png"
-                                                alt="Browse Books">
-                                        </a>
+                                <!-- Bootstrap Carousel -->
+                                <div id="carouselLibrary" class="carousel slide" data-bs-ride="carousel">
+                                    <div class="carousel-inner">
+                                        <!-- Slide 1 -->
+                                        <div class="carousel-item active text-center">
+                                            <a href="images/LibraryManagementSystem/Desktop/FP-HomePage.png"
+                                                class="glightbox" data-gallery="library">
+                                                <img src="images/LibraryManagementSystem/Desktop/FP-HomePage.png"
+                                                    class="d-block w-100 rounded" alt="Home Page">
+                                            </a>
+                                        </div>
+                                        <!-- Slide 2 -->
+                                        <div class="carousel-item text-center">
+                                            <a href="images/LibraryManagementSystem/Desktop/FP-BrowseBooks.png"
+                                                class="glightbox" data-gallery="library">
+                                                <img src="images/LibraryManagementSystem/Desktop/FP-BrowseBooks.png"
+                                                    class="d-block w-100 rounded" alt="Browse Books">
+                                            </a>
+                                        </div>
+                                        <!-- Slide 3 -->
+                                        <div class="carousel-item text-center">
+                                            <a href="images/LibraryManagementSystem/Desktop/FP-BookDetails.png"
+                                                class="glightbox" data-gallery="library">
+                                                <img src="images/LibraryManagementSystem/Desktop/FP-BookDetails.png"
+                                                    class="d-block w-100 rounded" alt="Book Details">
+                                            </a>
+                                        </div>
+                                        <!-- Slide 4 -->
+                                        <div class="carousel-item text-center">
+                                            <a href="images/LibraryManagementSystem/Desktop/FP-BorrowedBooks.png"
+                                                class="glightbox" data-gallery="library">
+                                                <img src="images/LibraryManagementSystem/Desktop/FP-BorrowedBooks.png"
+                                                    class="d-block w-100 rounded" alt="Borrowed Books">
+                                            </a>
+                                        </div>
+                                        <!-- Slide 5 -->
+                                        <div class="carousel-item text-center">
+                                            <a href="images/LibraryManagementSystem/Desktop/FP-Dashboard.png"
+                                                class="glightbox" data-gallery="library">
+                                                <img src="images/LibraryManagementSystem/Desktop/FP-Dashboard.png"
+                                                    class="d-block w-100 rounded" alt="Dashboard">
+                                            </a>
+                                        </div>
+                                        <!-- Slide 6 -->
+                                        <div class="carousel-item text-center">
+                                            <a href="images/LibraryManagementSystem/Desktop/FP-ManageBooks.png"
+                                                class="glightbox" data-gallery="library">
+                                                <img src="images/LibraryManagementSystem/Desktop/FP-ManageBooks.png"
+                                                    class="d-block w-100 rounded" alt="Manage Books">
+                                            </a>
+                                        </div>
+                                        <!-- Slide 7 -->
+                                        <div class="carousel-item text-center">
+                                            <a href="images/LibraryManagementSystem/Desktop/FP-ManageUsers.png"
+                                                class="glightbox" data-gallery="library">
+                                                <img src="images/LibraryManagementSystem/Desktop/FP-ManageUsers.png"
+                                                    class="d-block w-100 rounded" alt="Manage Users">
+                                            </a>
+                                        </div>
+                                        <!-- Slide 8 -->
+                                        <div class="carousel-item text-center">
+                                            <a href="images/LibraryManagementSystem/Desktop/FP-UserDetails.png"
+                                                class="glightbox" data-gallery="library">
+                                                <img src="images/LibraryManagementSystem/Desktop/FP-UserDetails.png"
+                                                    class="d-block w-100 rounded" alt="User Details">
+                                            </a>
+                                        </div>
                                     </div>
-                                    <div class="col-6 col-md-3">
-                                        <a href="images/LibraryManagementSystem/Desktop/FP-BookDetails.png"
-                                            class="glightbox" data-gallery="library">
-                                            <img class="img-fluid rounded"
-                                                src="images/LibraryManagementSystem/Desktop/FP-BookDetails.png"
-                                                alt="Book Details">
-                                        </a>
+
+                                    <!-- Controls -->
+                                    <button class="carousel-control-prev" type="button"
+                                        data-bs-target="#carouselLibrary" data-bs-slide="prev">
+                                        <span class="carousel-control-prev-icon"></span>
+                                        <span class="visually-hidden">Previous</span>
+                                    </button>
+                                    <button class="carousel-control-next" type="button"
+                                        data-bs-target="#carouselLibrary" data-bs-slide="next">
+                                        <span class="carousel-control-next-icon"></span>
+                                        <span class="visually-hidden">Next</span>
+                                    </button>
+
+                                    <!-- Indicators -->
+                                    <div class="carousel-indicators">
+                                        <button type="button" data-bs-target="#carouselLibrary" data-bs-slide-to="0"
+                                            class="active"></button>
+                                        <button type="button" data-bs-target="#carouselLibrary"
+                                            data-bs-slide-to="1"></button>
+                                        <button type="button" data-bs-target="#carouselLibrary"
+                                            data-bs-slide-to="2"></button>
+                                        <button type="button" data-bs-target="#carouselLibrary"
+                                            data-bs-slide-to="3"></button>
+                                        <button type="button" data-bs-target="#carouselLibrary"
+                                            data-bs-slide-to="4"></button>
+                                        <button type="button" data-bs-target="#carouselLibrary"
+                                            data-bs-slide-to="5"></button>
+                                        <button type="button" data-bs-target="#carouselLibrary"
+                                            data-bs-slide-to="6"></button>
+                                        <button type="button" data-bs-target="#carouselLibrary"
+                                            data-bs-slide-to="7"></button>
                                     </div>
-                                    <!-- Add more images here -->
+
                                 </div>
                             </div>
 
                             <div class="modal-footer justify-content-center">
-                                <strong>Tip:</strong> Scroll or pinch to zoom, drag to move when zoomed.
+                                <strong>Tip:</strong> Click image to zoom/pan, scroll or pinch to zoom, drag to move.
                             </div>
 
                         </div>
                     </div>
                 </div>
-            </div>
     </section>
 
     <!-- Skills Section -->
@@ -638,6 +720,8 @@
             });
         });
     </script>
+
+
 
 </body>
 
