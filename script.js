@@ -240,13 +240,10 @@ function initializeTypingEffect() {
         // Start role typewriter after name is finished
         setTimeout(() => {
             typeWriterLoop(roleElement, [
-                "Fresh Graduate",
-                "Aspiring Developer",
-                "Web Developer",
-                ".NET Enthusiast",
-                "Frontend Developer",
-                "Backend Developer",
-                "Full Stack Developer"
+                "Software Developer",
+                "C# Developer",
+                "Full Stack .NET Developer",
+                "ASP.NET Core Developer"
             ],
                 100,    // typing speed
                 50,     // deleting speed  
